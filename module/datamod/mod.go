@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mikeqiao/ant/group"
+	"github.com/mikeqiao/newant/group"
 )
 
 type InitData func() bool

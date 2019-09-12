@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net"
 )
 
 var CM *ConnManager

@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net/proto"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net/proto"
 )
 
 var DB *STypeMap

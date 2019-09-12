@@ -5,9 +5,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net/msgtype"
-	"github.com/mikeqiao/ant/net/proto"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net/msgtype"
+	"github.com/mikeqiao/newant/net/proto"
 )
 
 var CreatID = int64(1)

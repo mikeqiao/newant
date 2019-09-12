@@ -5,9 +5,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mikeqiao/ant/log"
+	"github.com/mikeqiao/newant/log"
 
-	"github.com/mikeqiao/ant/net/proto"
+	"github.com/mikeqiao/newant/net/proto"
 )
 
 type TCPClient struct {

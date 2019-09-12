@@ -4,7 +4,7 @@ import (
 	"net"
 	"sync"
 
-	"github.com/mikeqiao/ant/log"
+	"github.com/mikeqiao/newant/log"
 )
 
 type Conn interface {

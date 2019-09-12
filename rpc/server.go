@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"runtime"
 
-	conf "github.com/mikeqiao/ant/config"
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net"
+	conf "github.com/mikeqiao/newant/config"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net"
 )
 
 type Server struct {

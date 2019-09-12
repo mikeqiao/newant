@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/mikeqiao/ant/group"
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net"
-	"github.com/mikeqiao/ant/net/proto"
-	"github.com/mikeqiao/ant/rpc"
+	"github.com/mikeqiao/newant/group"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net"
+	"github.com/mikeqiao/newant/net/proto"
+	"github.com/mikeqiao/newant/rpc"
 )
 
 type Module struct {

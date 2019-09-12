@@ -1,4 +1,4 @@
-package ant
+package newant
 
 type Func interface {
 	Init()

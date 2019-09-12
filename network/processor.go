@@ -1,8 +1,8 @@
 package network
 
 import (
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net"
 )
 
 var P *PL

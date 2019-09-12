@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/gomodule/redigo/redis"
-	conf "github.com/mikeqiao/ant/config"
-	"github.com/mikeqiao/ant/log"
+	conf "github.com/mikeqiao/newant/config"
+	"github.com/mikeqiao/newant/log"
 )
 
 type HandleData func(d string)

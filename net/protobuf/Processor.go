@@ -8,13 +8,13 @@ import (
 	"reflect"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/mikeqiao/ant/db/mysql"
-	"github.com/mikeqiao/ant/log"
-	mod "github.com/mikeqiao/ant/module"
-	"github.com/mikeqiao/ant/net"
-	"github.com/mikeqiao/ant/net/msgtype"
-	msg "github.com/mikeqiao/ant/net/proto"
-	"github.com/mikeqiao/ant/network"
+	"github.com/mikeqiao/newant/db/mysql"
+	"github.com/mikeqiao/newant/log"
+	mod "github.com/mikeqiao/newant/module"
+	"github.com/mikeqiao/newant/net"
+	"github.com/mikeqiao/newant/net/msgtype"
+	msg "github.com/mikeqiao/newant/net/proto"
+	"github.com/mikeqiao/newant/network"
 )
 
 // -------------------------

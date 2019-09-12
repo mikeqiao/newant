@@ -5,9 +5,9 @@ import (
 	"runtime"
 	"sync"
 
-	conf "github.com/mikeqiao/ant/config"
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net"
+	conf "github.com/mikeqiao/newant/config"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net"
 )
 
 var RPC = NewRPC()
@@ -70,7 +70,7 @@ func (r *RServer) Route(fid uint32, cb interface{}, in interface{}, data *net.Us
 		}
 	}
 	if nil != m {
-//		log.Debug("mod id:%v", m.mid)
+		//		log.Debug("mod id:%v", m.mid)
 		m.Route(fid, did, cb, in, data)
 	} else {
 		log.Debug("not find working module, fid:%v", did)
@@ -144,7 +144,7 @@ func (r *RPCServer) Route(fid, did uint32, cb interface{}, in interface{}, data 
 	}
 	if v, ok := r.Functions[did]; ok {
 		if nil != v {
-		//	log.Debug("have did:%v ", did)
+			//	log.Debug("have did:%v ", did)
 			v.Route(fid, cb, in, data)
 		}
 	} else {

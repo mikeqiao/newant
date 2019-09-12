@@ -3,9 +3,9 @@ package mysql
 import (
 	"fmt"
 
-	"github.com/mikeqiao/ant/log"
-	"github.com/mikeqiao/ant/net/proto"
-	"github.com/mikeqiao/ant/rpc"
+	"github.com/mikeqiao/newant/log"
+	"github.com/mikeqiao/newant/net/proto"
+	"github.com/mikeqiao/newant/rpc"
 )
 
 func HandleDBRQ(call *rpc.CallInfo) {

@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mikeqiao/ant/common"
-	conf "github.com/mikeqiao/ant/config"
-	"github.com/mikeqiao/ant/group"
+	"github.com/mikeqiao/newant/common"
+	conf "github.com/mikeqiao/newant/config"
+	"github.com/mikeqiao/newant/group"
 )
 
 // levels
