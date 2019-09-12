@@ -1,0 +1,50 @@
+package newant
+
+import (
+	"os"
+	"os/signal"
+
+	"github.com/mikeqiao/newant/group"
+	"github.com/mikeqiao/newant/log"
+	mod "github.com/mikeqiao/newant/module"
+	"github.com/mikeqiao/newant/network"
+)
+
+func Start(f Func) {
+	//初始化基本设置
+	Init()
+	//初始化功能设置
+	f.Init()
+	//开始运行服务程序
+	Run()
+	log.Debug("server is start")
+	//设置信号接收
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, os.Kill)
+	sig := <-c
+	log.Release("bee closing down (signal: %v)", sig)
+	//关闭服务
+	Close()
+	//关闭添加功能
+	f.Close()
+	//等待所以线程结束
+	group.Wait()
+}
+
+func Init() {
+	log.Init()
+	mod.Init()
+	network.Init()
+}
+
+func Run() {
+	log.Run()
+	mod.Run()
+	network.Run()
+}
+
+func Close() {
+	network.Close()
+	mod.Close()
+	log.Close()
+}
