@@ -22,8 +22,8 @@ import (
 // -------------------------
 type Processor struct {
 	littleEndian bool
-	msgInfo      map[uint16]*MsgInfo
-	msgID        map[reflect.Type]uint16
+	msgInfo      map[uint32]*MsgInfo
+	msgID        map[reflect.Type]uint32
 }
 
 type MsgInfo struct {
@@ -37,8 +37,8 @@ type MsgHandler func(msg interface{}, data *net.UserData)
 func NewProcessor() *Processor {
 	p := new(Processor)
 	p.littleEndian = false
-	p.msgInfo = make(map[uint16]*MsgInfo)
-	p.msgID = make(map[reflect.Type]uint16)
+	p.msgInfo = make(map[uint32]*MsgInfo)
+	p.msgID = make(map[reflect.Type]uint32)
 	p.baseMsg()
 	return p
 }
@@ -75,7 +75,7 @@ func (p *Processor) SetByteOrder(littleEndian bool) {
 	p.littleEndian = littleEndian
 }
 
-func (p *Processor) Register(msg interface{}, id uint16) uint16 {
+func (p *Processor) Register(msg interface{}, id uint32) uint32 {
 	msgType := reflect.TypeOf(msg)
 	if msgType == nil || msgType.Kind() != reflect.Ptr {
 		log.Fatal("protobuf message pointer required")
@@ -99,7 +99,7 @@ func (p *Processor) Register(msg interface{}, id uint16) uint16 {
 	return id
 }
 
-func (p *Processor) SetRouter(id uint16, fid uint32) {
+func (p *Processor) SetRouter(id uint32, fid uint32) {
 	if v, ok := p.msgInfo[id]; !ok || nil == v {
 		log.Fatal("message %s not registered", id)
 	} else {
@@ -107,7 +107,7 @@ func (p *Processor) SetRouter(id uint16, fid uint32) {
 	}
 }
 
-func (p *Processor) SetHandler(id uint16, msgHandler MsgHandler) {
+func (p *Processor) SetHandler(id uint32, msgHandler MsgHandler) {
 	if v, ok := p.msgInfo[id]; !ok || nil == v {
 		log.Fatal("message %s not registered", id)
 	} else {
@@ -115,7 +115,7 @@ func (p *Processor) SetHandler(id uint16, msgHandler MsgHandler) {
 	}
 }
 
-func (p *Processor) Route(id uint16, msg interface{}, data *net.UserData) error {
+func (p *Processor) Route(id uint32, msg interface{}, data *net.UserData) error {
 
 	i, ok := p.msgInfo[id]
 	if !ok || nil == i {
@@ -139,16 +139,16 @@ func (p *Processor) Route(id uint16, msg interface{}, data *net.UserData) error 
 	return nil
 }
 
-func (p *Processor) Unmarshal(data []byte) (uint16, interface{}, error) {
-	if len(data) < 2 {
+func (p *Processor) Unmarshal(data []byte) (uint32, interface{}, error) {
+	if len(data) < 4 {
 		return 0, nil, errors.New("protobuf data too short")
 	}
 	// id
-	var id uint16
+	var id uint32
 	if p.littleEndian {
-		id = binary.LittleEndian.Uint16(data)
+		id = binary.LittleEndian.Uint32(data)
 	} else {
-		id = binary.BigEndian.Uint16(data)
+		id = binary.BigEndian.Uint32(data)
 	}
 
 	i, ok := p.msgInfo[id]
@@ -157,11 +157,11 @@ func (p *Processor) Unmarshal(data []byte) (uint16, interface{}, error) {
 	}
 	// msg
 	msg := reflect.New(i.msgType.Elem()).Interface()
-	return id, msg, proto.UnmarshalMerge(data[2:], msg.(proto.Message))
+	return id, msg, proto.UnmarshalMerge(data[4:], msg.(proto.Message))
 }
 
 // goroutine safe
-func (p *Processor) Marshal(msg interface{}) (uint16, [][]byte, error) {
+func (p *Processor) Marshal(msg interface{}) (uint32, [][]byte, error) {
 	msgType := reflect.TypeOf(msg)
 	// id
 	_id, ok := p.msgID[msgType]
@@ -170,11 +170,11 @@ func (p *Processor) Marshal(msg interface{}) (uint16, [][]byte, error) {
 		return _id, nil, err
 	}
 
-	id := make([]byte, 2)
+	id := make([]byte, 4)
 	if p.littleEndian {
-		binary.LittleEndian.PutUint16(id, _id)
+		binary.LittleEndian.PutUint32(id, _id)
 	} else {
-		binary.BigEndian.PutUint16(id, _id)
+		binary.BigEndian.PutUint32(id, _id)
 	}
 	// data
 	data, err := proto.Marshal(msg.(proto.Message))
@@ -187,7 +187,7 @@ func (p *Processor) Range(f func(id uint16, t reflect.Type)) {
 	}
 }
 
-func (p *Processor) GetMsg(id uint16) interface{} {
+func (p *Processor) GetMsg(id uint32) interface{} {
 	i, ok := p.msgInfo[id]
 	if !ok {
 		log.Error("message id %v not registered", id)

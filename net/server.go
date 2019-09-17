@@ -62,7 +62,6 @@ func (this *TCPServer) init() {
 
 func (this *TCPServer) run() {
 	this.wgln.Add(1)
-
 	var tempDelay time.Duration
 	for {
 		conn, err := this.ln.Accept()

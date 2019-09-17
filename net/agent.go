@@ -223,7 +223,7 @@ func (a *TcpAgent) Close() {
 	}
 	a.Closed = true
 	var msg interface{}
-	var id uint16
+	var id uint32
 	if a.ctype == 2 {
 		msg = &proto.DelConnect{
 			Id: a.RUId,

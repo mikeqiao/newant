@@ -5,6 +5,8 @@ import (
 	"errors"
 	"io"
 	"math"
+
+	"github.com/mikeqiao/newant/log"
 )
 
 type MsgParser struct {
@@ -16,7 +18,7 @@ type MsgParser struct {
 
 func NewMsgParser() *MsgParser {
 	p := &MsgParser{
-		lenMsgLen:    2,
+		lenMsgLen:    4,
 		minMsgLen:    1,
 		maxMsgLen:    4096,
 		littleEndian: false,
@@ -86,7 +88,8 @@ func (p *MsgParser) Read(conn *TCPConn) ([]byte, error) {
 		}
 
 	}
-
+	log.Debug("msglendata:%v", bufMsgLen)
+	log.Debug("msglen:%v", msglen)
 	//check len
 	if msglen > p.maxMsgLen {
 		return nil, errors.New("message too long")

@@ -20,7 +20,7 @@ func HandleDBRQ(call *rpc.CallInfo) {
 	data := call.Data
 	var res interface{}
 	if nil != data && nil != data.Agent && nil != data.Agent.Processor && msgid > 0 {
-		res = data.Agent.Processor.GetMsg(uint16(msgid))
+		res = data.Agent.Processor.GetMsg(uint32(msgid))
 	}
 
 	log.Debug("call:%v", call)

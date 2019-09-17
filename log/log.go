@@ -125,6 +125,8 @@ func (l *Logger) Run() {
 				d := value.String()
 				if "" != d {
 					l.baseLogger.Output(3, d)
+				} else {
+					fmt.Println("d is nil ")
 				}
 			}
 		}
@@ -133,6 +135,7 @@ func (l *Logger) Run() {
 		}
 	}
 Loop:
+	fmt.Println("log close")
 	l.Close()
 	group.Done()
 }
@@ -206,7 +209,6 @@ func (l *Logger) doPrintf(level int, printLevel string, format string, a ...inte
 	}
 	buffer.WriteString(fmt.Sprintf(format, a...))
 	l.data.Push(buffer)
-
 	if level == FatalLevel {
 		os.Exit(1)
 	}

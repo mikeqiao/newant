@@ -1,7 +1,7 @@
 package msgtype
 
 const (
-	_None uint16 = iota
+	_None uint32 = iota
 	NewConnect
 	DelConnect
 	ServerDelConnect

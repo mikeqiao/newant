@@ -111,6 +111,7 @@ func (this *NetClient) tcpConnect() {
 		client.Processor = this.Processor
 		client.NewAgent = net.NewAgent
 		client.Version = this.Version
+		client.LittleEndian = this.LittleEndian
 	}
 	if this.Client != nil {
 		log.Debug("client.ConnAddr: %s", this.ConnAddr)
